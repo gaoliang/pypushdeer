@@ -37,6 +37,6 @@ pushdeer.send_text("hello world", server="some_server", pushkey="some_key")
 
 ## TODO:
 
-- [] arguments validate
-- [] exception handling
-- [] unit test
+- [ ] arguments validate
+- [ ] exception handling
+- [ ] unit test
