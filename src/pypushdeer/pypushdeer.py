@@ -60,7 +60,6 @@ class PushDeer:
             except IndexError:
                 raise "pypushdeer did not receive result, send may failed"
 
-
     def send_markdown(self, text: str, desp: Optional[str] = None, server: Optional[str] = None,
                       pushkey: Optional[str] = None):
         if not pushkey and not self.pushkey:
