@@ -16,27 +16,29 @@ class PushDeer:
         if pushkey:
             self.pushkey = pushkey
 
-    def send_text(self, text: str, server: Optional[str] = None, pushkey: Optional[str] = None):
+    def send_text(self, text: str, desp: Optional[str] = None, server: Optional[str] = None, pushkey: Optional[str] = None):
         if not pushkey and not self.pushkey:
             raise ValueError("pushkey must be specified")
 
         requests.get(server or self.server + self.endpoint, params={
             "pushkey": self.pushkey or pushkey,
             "text": text,
-            "type": "text"
+            "type": "text",
+            "desp": desp,
         })
 
-    def send_markdown(self, text: str, server: Optional[str] = None, pushkey: Optional[str] = None):
+    def send_markdown(self, text: str, desp: Optional[str] = None, server: Optional[str] = None, pushkey: Optional[str] = None):
         if not pushkey and not self.pushkey:
             raise ValueError("pushkey must be specified")
 
         requests.get(server or self.server + self.endpoint, params={
             "pushkey": self.pushkey or pushkey,
             "text": text,
-            "type": "markdown"
+            "type": "markdown",
+            "desp": desp,
         })
 
-    def send_image(self, image_url_or_base64: str, server: Optional[str] = None, pushkey: Optional[str] = None):
+    def send_image(self, image_url_or_base64: str, desp: Optional[str] = None, server: Optional[str] = None, pushkey: Optional[str] = None):
 
         if not pushkey and not self.pushkey:
             raise ValueError("pushkey must be specified")
@@ -44,5 +46,6 @@ class PushDeer:
         requests.get(server or self.server + self.endpoint, params={
             "pushkey": self.pushkey or pushkey,
             "text": image_url_or_base64,
-            "type": "image"
+            "type": "image",
+            "desp": desp,
         })
