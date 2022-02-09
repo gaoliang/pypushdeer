@@ -16,10 +16,8 @@ class TestPushDeer(TestCase):
         from pypushdeer import PushDeer
         pushdeer = PushDeer()
         pushdeer.send_push_request = mock.Mock(return_value=fail)
-        with self.assertRaises(TypeError):
-            pushdeer.send_text("text list test", pushkey=['key1', 'key2'])
-        with self.assertRaises(TypeError):
-            pushdeer.send_text("text test", pushkey='key')
+        self.assertFalse(pushdeer.send_text("text list test", pushkey=['key1', 'key2']))
+        self.assertFalse(pushdeer.send_text("text test", pushkey='key'))
         pushdeer.send_push_request = mock.Mock(return_value=success)
         with self.assertRaises(ValueError):
             pushdeer.send_text("no pushkey")
