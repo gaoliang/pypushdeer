@@ -21,7 +21,6 @@ class PushDeer:
             raise ValueError("pushkey must be specified")
 
         res = self._send_push_request(desp, pushkey or self.pushkey, server or self.server, text, text_type)
-        print(res)
         if res["content"]["result"]:
             result = json.loads(res["content"]["result"][0])
             if result["success"] == "ok":
@@ -46,8 +45,8 @@ class PushDeer:
         @param text: message : text
         @param desp: the second part of the message (optional)
         @param server: server base
-        @param pushkey: PushDeer pushkeys, multiple pushkey use list of string, single pushkey use string
-        @return: Boolean
+        @param pushkey: pushDeer pushkey
+        @return: success or not
         """
         return self._push(text=text, desp=desp, server=server, pushkey=pushkey, text_type='text')
 
@@ -57,8 +56,8 @@ class PushDeer:
         Text in Markdown format are accepted when type is markdown.
         @param text: message : text in markdown
         @param desp: the second part of the message in markdown (optional)
-        @param server: optional server base
-        @param pushkey: pushkey
+        @param server: server base
+        @param pushkey: pushDeer pushkey
         @return: success or not
         """
         return self._push(text=text, desp=desp, server=server, pushkey=pushkey, text_type='markdown')
@@ -66,11 +65,19 @@ class PushDeer:
     def send_image(self, image_src: str, desp: Optional[str] = None, server: Optional[str] = None,
                    pushkey: Union[str, list, None] = None):
         """
-        Only image url are accepted by API now, when type is image.
+        Only image src are accepted by API now, when type is image.
         @param image_src: message : image URL
-        @param desp: the second part of the message
-        @param server: optional server http address
-        @param pushkey: PushDeer pushkeys, multiple pushkey use list of string, single pushkey use string
+        @param desp: the second part of the message (optional)
+        @param server: server base
+        @param pushkey: pushDeer pushkey
         @return: success or not
         """
         return self._push(text=image_src, desp=desp, server=server, pushkey=pushkey, text_type='image')
+
+if __name__ == "__main__":
+    pushdeer = PushDeer(pushkey="PDU4664TSS6LHqoRH7khFzG5ii7eJrgIvCEeC3Ar")
+    pushdeer.send_text("hello world", desp="optional description")
+    pushdeer.send_markdown("# hello world", desp="**optional** description in markdown")
+    pushdeer.send_image("https://github.com/easychen/pushdeer/raw/main/doc/image/clipcode.png")
+    pushdeer.send_image(
+        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=")

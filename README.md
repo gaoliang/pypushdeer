@@ -1,6 +1,8 @@
 # pypushdeer
 
 ![](https://github.com/gaoliang/pypushdeer/actions/workflows/pytest.yml/badge.svg)
+![](https://img.shields.io/pypi/wheel/pypushdeer)
+![](https://img.shields.io/pypi/pyversions/pypushdeer)
 
 [PushDeer](https://github.com/easychen/pushdeer) SDK for Python.
 
@@ -18,8 +20,8 @@ pip install pypushdeer
 from pypushdeer import PushDeer
 
 pushdeer = PushDeer(pushkey="your_push_key")
-pushdeer.send_text("hello world")
-pushdeer.send_markdown("# hello world")
+pushdeer.send_text("hello world", desp="optional description")
+pushdeer.send_markdown("# hello world", desp="**optional** description in markdown")
 pushdeer.send_image("https://github.com/easychen/pushdeer/raw/main/doc/image/clipcode.png")
 pushdeer.send_image(
     "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVQYV2NgYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=")
@@ -45,5 +47,5 @@ pushdeer.send_text("hello world", server="some_server", pushkey="some_key")
 ## TODO:
 
 - [x] unit test
+- [x] exception handling
 - [ ] arguments validate
-- [ ] exception handling
