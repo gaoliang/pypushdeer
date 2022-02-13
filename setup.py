@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="pypushdeer",
-    version="0.0.2",
+    version="0.0.3",
     author="Gao Liang",
     author_email="gaoliangim@gmail.com",
     description="PushDeer for Python",
