@@ -15,12 +15,12 @@ class PushDeer:
             self.pushkey = pushkey
 
     def _push(self, text: str, desp: Optional[str] = None, server: Optional[str] = None,
-              pushkey: Optional[str] = None, type: Optional[str] = None):
+              pushkey: Optional[str] = None, text_type: Optional[str] = None):
 
         if not pushkey and not self.pushkey:
             raise ValueError("pushkey must be specified")
 
-        res = self._send_push_request(desp, pushkey or self.pushkey, server or self.server, text, type)
+        res = self._send_push_request(desp, pushkey or self.pushkey, server or self.server, text, text_type)
         print(res)
         if res["content"]["result"]:
             result = json.loads(res["content"]["result"][0])
@@ -49,7 +49,7 @@ class PushDeer:
         @param pushkey: PushDeer pushkeys, multiple pushkey use list of string, single pushkey use string
         @return: Boolean
         """
-        return self._push(text=text, desp=desp, server=server, pushkey=pushkey, type='text')
+        return self._push(text=text, desp=desp, server=server, pushkey=pushkey, text_type='text')
 
     def send_markdown(self, text: str, desp: Optional[str] = None, server: Optional[str] = None,
                       pushkey: Union[str, list, None] = None):
@@ -61,7 +61,7 @@ class PushDeer:
         @param pushkey: pushkey
         @return: success or not
         """
-        return self._push(text=text, desp=desp, server=server, pushkey=pushkey, type='markdown')
+        return self._push(text=text, desp=desp, server=server, pushkey=pushkey, text_type='markdown')
 
     def send_image(self, image_src: str, desp: Optional[str] = None, server: Optional[str] = None,
                    pushkey: Union[str, list, None] = None):
@@ -73,4 +73,4 @@ class PushDeer:
         @param pushkey: PushDeer pushkeys, multiple pushkey use list of string, single pushkey use string
         @return: success or not
         """
-        return self._push(text=image_src, desp=desp, server=server, pushkey=pushkey, type='image')
+        return self._push(text=image_src, desp=desp, server=server, pushkey=pushkey, text_type='image')
