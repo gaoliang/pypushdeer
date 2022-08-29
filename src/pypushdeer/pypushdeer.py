@@ -75,6 +75,7 @@ class PushDeer:
         return self._push(text=image_src, desp=desp, server=server, pushkey=pushkey, text_type='image', **kwargs)
 
 
+
 if __name__ == "__main__":
     pushdeer = PushDeer(pushkey="PDU4664TSS6LHqoRH7khFzG5ii7eJrgIvCEeC3Ar")
     pushdeer.send_text("hello world", desp="optional description")
